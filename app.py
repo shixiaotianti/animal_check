@@ -16,13 +16,14 @@ from config import DB_CONFIG, MODEL_CONFIG, ANIMAL_CLASSES_CN, PURE_ANIMALS
 
 # ==================== 初始化 ====================
 
-# 创建上传目录
 UPLOAD_DIR = Path("uploads")
 UPLOAD_DIR.mkdir(exist_ok=True)
 
-# 加载 YOLO 模型
+MODEL_CACHE_DIR = Path("/app/.cache/ultralytics")
+MODEL_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+
 print("正在加载 YOLOv8 模型...")
-model = YOLO(MODEL_CONFIG['model_name'])
+model = YOLO(MODEL_CONFIG['model_name'], cache_dir=str(MODEL_CACHE_DIR))
 print("模型加载完成！")
 
 

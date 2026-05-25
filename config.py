@@ -16,7 +16,7 @@ DB_CONFIG = {
 
 # YOLO 模型配置
 MODEL_CONFIG = {
-    'model_name': 'yolov8x.pt',
+    'model_name': 'yolov8l.pt',
     'confidence_threshold': 0.3,
 }
 
