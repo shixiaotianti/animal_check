@@ -7,6 +7,10 @@ RUN apt-get update && apt-get install -y \
     libgl1 \
     libxkbcommon-x11-0 \
     libdbus-1-3 \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
