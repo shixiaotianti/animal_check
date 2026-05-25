@@ -39,6 +39,40 @@ def get_db_connection():
         return None
 
 
+def init_database():
+    """初始化数据库表结构（如果不存在则创建）"""
+    conn = get_db_connection()
+    if not conn:
+        print("❌ 无法初始化数据库：连接失败")
+        return False
+
+    try:
+        cursor = conn.cursor()
+        sql = """
+            CREATE TABLE IF NOT EXISTS animal_check (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                image_path VARCHAR(255) NOT NULL,
+                image_name VARCHAR(255) NOT NULL,
+                detected_animals JSON,
+                top_animal VARCHAR(100),
+                confidence FLOAT,
+                detection_count INT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """
+        cursor.execute(sql)
+        conn.commit()
+        cursor.close()
+        conn.close()
+        print("✅ 数据库表初始化完成")
+        return True
+    except Exception as e:
+        print(f"❌ 数据库表初始化失败: {e}")
+        if conn:
+            conn.close()
+        return False
+
+
 def save_to_database(image_path, image_name, detections):
     """
     保存识别结果到数据库
@@ -315,18 +349,16 @@ def create_interface():
 
 # ==================== 启动应用 ====================
 
+# 初始化数据库表结构
+init_database()
+
+# 创建 Gradio 界面（在模块级别，确保 WSGI 服务器可以导入）
+demo = create_interface()
+
+# WSGI 兼容导出，供 Railway 等平台使用
+app = demo.app
+
 if __name__ == "__main__":
-    print("正在检查数据库连接...")
-    test_conn = get_db_connection()
-    if test_conn:
-        print("✅ 数据库连接成功")
-        test_conn.close()
-    else:
-        print("❌ 数据库连接失败，请检查 config.py 中的配置")
-        print("提示：确保 MySQL 服务已启动，并已执行 database.sql 创建数据库和表")
-
-    demo = create_interface()
-
     print("\n" + "=" * 50)
     print(" 动物识别系统启动中...")
     print("=" * 50)
@@ -340,6 +372,3 @@ if __name__ == "__main__":
         server_port=port,
         share=False
     )
-
-# 添加 WSGI 兼容，让 Railway 可以识别
-app = demo.app
