@@ -4,7 +4,7 @@ PYTHONUNBUFFERED = "1"
 PYTHONPYCACHEPREFIX = "/tmp/pycache"
 
 [phases.setup]
-nixPkgs = ["python310", "python310Packages.pip"]
+nixPkgs = ["python310", "python310Packages.pip", "libxcb", "libxkbcommon", "libGL"]
 
 [phases.install]
 cmds = [
