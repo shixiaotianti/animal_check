@@ -1,0 +1,30 @@
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+
+# 缓存
+__pycache__/
+*.pyc
+*.pyo
+.cache/
+
+# 上传文件
+uploads/
+
+# 测试
+tests/
+test_*.py
+
+# 文档
+README.md
+*.md
+LICENSE
+
+# 临时文件
+*.log
+*.tmp

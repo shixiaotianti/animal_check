@@ -1,0 +1,18 @@
+
+[variables]
+PYTHONUNBUFFERED = "1"
+PYTHONPYCACHEPREFIX = "/tmp/pycache"
+
+[phases.setup]
+nixPkgs = ["python310", "python310Packages.pip"]
+
+[phases.install]
+cmds = [
+  "pip install --no-cache-dir -r requirements.txt"
+]
+
+[phases.build]
+cmds = []
+
+[start]
+cmd = "python app.py"
