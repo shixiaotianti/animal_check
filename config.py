@@ -2,21 +2,24 @@
 动物识别系统 - 配置文件
 """
 
+import os
+
 # MySQL 数据库配置
 DB_CONFIG = {
-    'host': 'localhost',
-    'port': 3306,
-    'user': 'root',
-    'password': '@ZXA53147qiufeng',  # 请修改为你的 MySQL 密码
-    'database': 'animal_recognition',
+    'host': os.getenv('DB_HOST', 'localhost'),
+    'port': int(os.getenv('DB_PORT', 3306)),
+    'user': os.getenv('DB_USER', 'root'),
+    'password': os.getenv('DB_PASSWORD', '@ZXA53147qiufeng'),
+    'database': os.getenv('DB_NAME', 'animal_recognition'),
     'charset': 'utf8mb4'
 }
 
-# ... existing code ...
+# YOLO 模型配置
 MODEL_CONFIG = {
     'model_name': 'yolov8x.pt',
     'confidence_threshold': 0.3,
 }
+
 
 
 # COCO 数据集中的动物类别（英文 -> 中文映射）

@@ -318,8 +318,8 @@ def create_interface():
 
 # ==================== 启动应用 ====================
 
+# ... existing code ...
 if __name__ == "__main__":
-    # 检查数据库连接
     print("正在检查数据库连接...")
     test_conn = get_db_connection()
     if test_conn:
@@ -329,18 +329,19 @@ if __name__ == "__main__":
         print("❌ 数据库连接失败，请检查 config.py 中的配置")
         print("提示：确保 MySQL 服务已启动，并已执行 database.sql 创建数据库和表")
 
-    # 创建并启动界面
     demo = create_interface()
 
     print("\n" + "=" * 50)
     print("🚀 动物识别系统启动中...")
     print("=" * 50)
-    print("\n请在浏览器中打开以下地址访问应用：")
-    print("http://127.0.0.1:7860")
+
+    port = int(os.getenv('PORT', 7860))
+    print(f"\n服务端口: {port}")
     print("\n按 Ctrl+C 可停止服务\n")
 
     demo.launch(
         server_name="0.0.0.0",
-        server_port=7860,
-        share=False  # 设为 True 可生成临时公网链接
+        server_port=port,
+        share=False
     )
+
