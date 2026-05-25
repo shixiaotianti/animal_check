@@ -133,7 +133,6 @@ def get_history(limit=20):
 
 # ==================== 动物识别核心功能 ====================
 
-# ... existing code ...
 def detect_animals(image):
     """
     识别图片中的动物
@@ -165,9 +164,6 @@ def detect_animals(image):
         augment=True,
         half=False
     )
-
-# ... existing code ...
-
 
     # 解析结果
     detections = []
@@ -219,10 +215,10 @@ def clear_history():
 def create_interface():
     """创建 Gradio 界面"""
 
-    with gr.Blocks(title="🐾 动物识别系统", theme=gr.themes.Soft()) as demo:
+    with gr.Blocks(title=" 动物识别系统", theme=gr.themes.Soft()) as demo:
 
         gr.Markdown("""
-        # 🐾 智能动物识别系统
+        #  智能动物识别系统
 
         基于 YOLOv8 深度学习模型，支持识别 80 种常见动物。
 
@@ -235,7 +231,7 @@ def create_interface():
         with gr.Row():
             # 左侧：图片上传和显示
             with gr.Column(scale=1):
-                gr.Markdown("### 📷 上传图片")
+                gr.Markdown("###  上传图片")
                 input_image = gr.Image(
                     type="pil",
                     label="选择或拖拽图片",
@@ -243,12 +239,12 @@ def create_interface():
                 )
 
                 with gr.Row():
-                    detect_btn = gr.Button("🔍 开始识别", variant="primary", size="lg")
-                    clear_btn = gr.Button("🗑️ 清空", size="lg")
+                    detect_btn = gr.Button(" 开始识别", variant="primary", size="lg")
+                    clear_btn = gr.Button(" 清空", size="lg")
 
             # 右侧：识别结果
             with gr.Column(scale=1):
-                gr.Markdown("### 🎯 识别结果")
+                gr.Markdown("###  识别结果")
                 output_image = gr.Image(
                     label="标注后的图片",
                     height=400
@@ -261,7 +257,7 @@ def create_interface():
 
         # 历史记录区域
         gr.Markdown("---")
-        gr.Markdown("### 📋 最近识别记录")
+        gr.Markdown("###  最近识别记录")
 
         history_table = gr.DataFrame(
             headers=["时间", "图片", "识别结果", "置信度", "数量"],
@@ -272,7 +268,7 @@ def create_interface():
             label="识别历史"
         )
 
-        refresh_btn = gr.Button("🔄 刷新历史记录")
+        refresh_btn = gr.Button(" 刷新历史记录")
 
         # 事件绑定
         detect_btn.click(
@@ -318,7 +314,6 @@ def create_interface():
 
 # ==================== 启动应用 ====================
 
-# ... existing code ...
 if __name__ == "__main__":
     print("正在检查数据库连接...")
     test_conn = get_db_connection()
@@ -332,7 +327,7 @@ if __name__ == "__main__":
     demo = create_interface()
 
     print("\n" + "=" * 50)
-    print("🚀 动物识别系统启动中...")
+    print(" 动物识别系统启动中...")
     print("=" * 50)
 
     port = int(os.getenv('PORT', 7860))
@@ -345,3 +340,5 @@ if __name__ == "__main__":
         share=False
     )
 
+# 添加 WSGI 兼容，让 Railway 可以识别
+app = demo.app
