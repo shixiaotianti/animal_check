@@ -4,7 +4,7 @@ FROM python:3.13-slim
 RUN apt-get update && apt-get install -y \
     libxcb1 \
     libxkbcommon0 \
-    libgl1-mesa-glx \
+    libgl1 \
     libxkbcommon-x11-0 \
     libdbus-1-3 \
     && rm -rf /var/lib/apt/lists/*
