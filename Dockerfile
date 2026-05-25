@@ -3,7 +3,7 @@ FROM python:3.13-slim
 # Install system dependencies required by OpenCV
 RUN apt-get update && apt-get install -y \
     libxcb1 \
-    libxkbcommon1 \
+    libxkbcommon0 \
     libgl1-mesa-glx \
     libxkbcommon-x11-0 \
     libdbus-1-3 \
