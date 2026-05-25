@@ -9,14 +9,14 @@ DB_CONFIG = {
     'host': os.getenv('DB_HOST', 'localhost'),
     'port': int(os.getenv('DB_PORT', 3306)),
     'user': os.getenv('DB_USER', 'root'),
-    'password': os.getenv('DB_PASSWORD', '@ZXA53147qiufeng'),
+    'password': os.getenv('DB_PASSWORD'),
     'database': os.getenv('DB_NAME', 'animal_recognition'),
     'charset': 'utf8mb4'
 }
 
 # YOLO 模型配置
 MODEL_CONFIG = {
-    'model_name': 'yolov8l.pt',
+    'model_name': 'yolov8n.pt',
     'confidence_threshold': 0.3,
 }
 
